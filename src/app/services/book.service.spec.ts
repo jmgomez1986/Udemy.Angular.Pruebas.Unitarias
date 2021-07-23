@@ -35,6 +35,7 @@ const listBook: Book[] = [
 describe('BookService', () => {
   let service: BookService;
   let httpMock: HttpTestingController;
+  let storage = {};
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -47,6 +48,11 @@ describe('BookService', () => {
   beforeEach(() => {
     service = TestBed.inject(BookService);
     httpMock = TestBed.inject(HttpTestingController);
+
+    storage = {};
+    spyOn(localStorage, 'getItem').and.callFake((key: string) => {
+      return storage[key] ? storage[key] : null;
+    });
   });
 
   afterAll(() => {
@@ -64,5 +70,10 @@ describe('BookService', () => {
     const req = httpMock.expectOne(environment.API_REST_URL + '/book');
     expect(req.request.method).toBe('GET');
     req.flush(listBook);
+  });
+
+  it('getBooksFromCart return empty array when localStorage is empty', () => {
+    const listBook1 = service.getBooksFromCart();
+    expect(listBook1.length).toBe(0);
   });
 });
