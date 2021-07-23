@@ -76,7 +76,7 @@ describe('Home component', () => {
 
   it('getBook get books from the subscription', () => {
     // const bookService = fixture.debugElement.injector.get(BookService);
-    // const spy1 = spyOn(bookService, 'getBooks').and.returnValue(of(listBook));
+    // const spy1 = spyOn(bookService, 'getBooks').and.returnValue(of(listBook));  // Como esta mockeado ya no hace falta el espia
     component.getBooks();
     // expect(spy1).toHaveBeenCalled();
     expect(component.listBook.length).toBe(3);

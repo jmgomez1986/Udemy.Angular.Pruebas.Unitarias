@@ -5,17 +5,14 @@ import { Book } from '../../models/book.model';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-
   public listCartBook: Book[] = [];
   public totalPrice = 0;
   public Math = Math;
 
-  constructor(
-    private readonly _bookService: BookService
-  ) { }
+  constructor(private readonly _bookService: BookService) {}
 
   ngOnInit(): void {
     this.listCartBook = this._bookService.getBooksFromCart();
@@ -41,7 +38,7 @@ export class CartComponent implements OnInit {
     if (this.listCartBook && this.listCartBook.length > 0) {
       this._clearListCartBook();
     } else {
-       console.log("No books available");
+      console.log('No books available');
     }
   }
 
@@ -49,6 +46,4 @@ export class CartComponent implements OnInit {
     this.listCartBook = [];
     this._bookService.removeBooksFromCart();
   }
-
-
 }
