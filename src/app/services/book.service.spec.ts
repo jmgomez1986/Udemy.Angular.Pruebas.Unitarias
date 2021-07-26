@@ -41,7 +41,7 @@ const book: Book = {
   amount: 2,
 };
 
-fdescribe('BookService', () => {
+describe('BookService', () => {
   let service: BookService;
   let httpMock: HttpTestingController;
   let storage = {};
@@ -105,5 +105,14 @@ fdescribe('BookService', () => {
     listBook1 = service.getBooksFromCart();
     service.addBookToCart(book);
     expect(spy1).toHaveBeenCalled();
+  });
+
+  it('removeBooksFromCart removes the list from the localStorage', () => {
+    service.addBookToCart(book);
+    let listBook1 = service.getBooksFromCart();
+    expect(listBook1.length).toBe(1);
+    service.removeBooksFromCart();
+    listBook1 = service.getBooksFromCart();
+    expect(listBook1.length).toBe(0);
   });
 });
