@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Book } from '../models/book.model';
 import { environment } from '../../environments/environment.prod';
+import swal from 'sweetalert2';
 
 const listBook: Book[] = [
   {
@@ -32,7 +33,15 @@ const listBook: Book[] = [
   },
 ];
 
-describe('BookService', () => {
+const book: Book = {
+  name: '',
+  author: '',
+  isbn: '',
+  price: 15,
+  amount: 2,
+};
+
+fdescribe('BookService', () => {
   let service: BookService;
   let httpMock: HttpTestingController;
   let storage = {};
@@ -53,6 +62,12 @@ describe('BookService', () => {
     spyOn(localStorage, 'getItem').and.callFake((key: string) => {
       return storage[key] ? storage[key] : null;
     });
+
+    spyOn(localStorage, 'setItem').and.callFake(
+      (key: string, value: string) => {
+        return (storage[key] = value);
+      },
+    );
   });
 
   afterAll(() => {
@@ -75,5 +90,20 @@ describe('BookService', () => {
   it('getBooksFromCart return empty array when localStorage is empty', () => {
     const listBook1 = service.getBooksFromCart();
     expect(listBook1.length).toBe(0);
+  });
+
+  it('addBookToCart add a book successfully when the list does not exist in the localStorage', () => {
+    const toast = {
+      fire: () => null,
+    } as any;
+    const spy1 = spyOn(swal, 'mixin').and.callFake(() => {
+      return toast;
+    });
+    let listBook1 = service.getBooksFromCart();
+    expect(listBook1.length).toBe(0);
+    service.addBookToCart(book);
+    listBook1 = service.getBooksFromCart();
+    service.addBookToCart(book);
+    expect(spy1).toHaveBeenCalled();
   });
 });
