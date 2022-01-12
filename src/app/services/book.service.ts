@@ -9,11 +9,11 @@ import swal from 'sweetalert2';
 
 @Injectable()
 export class BookService {
-  constructor(private readonly _httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   public getBooks(): Observable<Book[]> {
     const url: string = environment.API_REST_URL + `/book`;
-    return this._httpClient.get<Book[]>(url);
+    return this.httpClient.get<Book[]>(url);
   }
 
   public getBooksFromCart(): Book[] {

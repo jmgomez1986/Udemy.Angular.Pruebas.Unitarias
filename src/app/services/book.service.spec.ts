@@ -66,7 +66,7 @@ describe('BookService', () => {
     spyOn(localStorage, 'setItem').and.callFake(
       (key: string, value: string) => {
         return (storage[key] = value);
-      },
+      }
     );
   });
 
@@ -88,8 +88,8 @@ describe('BookService', () => {
   });
 
   it('getBooksFromCart return empty array when localStorage is empty', () => {
-    const listBook1 = service.getBooksFromCart();
-    expect(listBook1.length).toBe(0);
+    const listBookTest = service.getBooksFromCart();
+    expect(listBookTest.length).toBe(0);
   });
 
   it('addBookToCart add a book successfully when the list does not exist in the localStorage', () => {
@@ -99,20 +99,20 @@ describe('BookService', () => {
     const spy1 = spyOn(swal, 'mixin').and.callFake(() => {
       return toast;
     });
-    let listBook1 = service.getBooksFromCart();
-    expect(listBook1.length).toBe(0);
+    let listBookTest = service.getBooksFromCart();
+    expect(listBookTest.length).toBe(0);
     service.addBookToCart(book);
-    listBook1 = service.getBooksFromCart();
+    listBookTest = service.getBooksFromCart();
     service.addBookToCart(book);
     expect(spy1).toHaveBeenCalled();
   });
 
   it('removeBooksFromCart removes the list from the localStorage', () => {
     service.addBookToCart(book);
-    let listBook1 = service.getBooksFromCart();
-    expect(listBook1.length).toBe(1);
+    let listBookTest = service.getBooksFromCart();
+    expect(listBookTest.length).toBe(1);
     service.removeBooksFromCart();
-    listBook1 = service.getBooksFromCart();
-    expect(listBook1.length).toBe(0);
+    listBookTest = service.getBooksFromCart();
+    expect(listBookTest.length).toBe(0);
   });
 });
