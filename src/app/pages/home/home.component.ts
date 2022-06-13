@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
 
 import { take } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,16 @@ import { take } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   public listBook: Book[] = [];
 
-  constructor(public readonly bookService: BookService) {}
+  constructor(
+    public readonly bookService: BookService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   ngOnInit(): void {
     this.getBooks();
+
+    // window.alert('Hello!!!');
+    this.document.defaultView.alert('Hello!!!');
   }
 
   public getBooks(): void {

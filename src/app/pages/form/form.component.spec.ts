@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-fdescribe('Form component', () => {
+describe('Form component', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
 
