@@ -12,12 +12,16 @@ import { NavModule } from '../nav/nav.module';
 import { ReduceTextPipe } from './reduce-text/reduce-text.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogModule } from '../dialogs/confirmation-dialog/confirmation-dialog.module';
+import { FormComponent } from './form/form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     NavModule,
     PagesRoutingModule,
     MatDialogModule,
@@ -28,6 +32,7 @@ import { ConfirmationDialogModule } from '../dialogs/confirmation-dialog/confirm
     HomeComponent,
     CartComponent,
     ReduceTextPipe,
+    FormComponent,
   ],
   exports: [
     PagesComponent,
